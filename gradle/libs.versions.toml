@@ -15,7 +15,7 @@ runvelocity = "2.0.1"
 # Utility Libraries
 configurate = "4.1.2"
 libby = "43d25ade72"
-bstats = "3.0.0"
+bstats = "3.0.2"
 
 sqlite = "3.42.0.0"
 
