@@ -17,7 +17,8 @@ configurate = "4.1.2"
 libby = "43d25ade72"
 bstats = "3.0.0"
 
-sqlite = "3.42.0.0"
+hikaricp = "5.0.1"
+h2database = "2.1.214"
 
 [libraries]
 
@@ -32,7 +33,8 @@ configurate-hocon = { module = "org.spongepowered:configurate-hocon", version.re
 configurate-kotlin = { module = "org.spongepowered:configurate-extra-kotlin", version.ref = "configurate" }
 
 libby = { group = "com.github.AlessioDP.libby", name = "libby-velocity", version.ref = "libby" }
-sqlite = { module = "org.xerial:sqlite-jdbc", version.ref = "sqlite" }
+hikaricp = { module = "com.zaxxer:HikariCP", version.ref = "hikaricp" }
+h2database = { module =  "com.h2database:h2", version.ref = "h2database" }
 
 [plugins]
 

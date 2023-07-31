@@ -13,10 +13,10 @@ dependencies {
     compileOnly(libs.velocity)
     annotationProcessor(libs.velocity)
     compileOnly(libs.authmevelocity)
-    implementation("com.zaxxer:HikariCP:5.0.1") {
+    implementation(libs.hikaricp) {
         isTransitive = false
     }
-    implementation(libs.sqlite)
+    implementation(libs.h2database)
 }
 
 tasks {
@@ -33,6 +33,12 @@ tasks {
     }
     runVelocity {
         velocityVersion(libs.versions.velocity.get())
+    }
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
+        relocate("com.zaxxer.hikari", "io.github._4drian3d.authmevelocity.lastserver.libs.hikari")
+        relocate("org.h2", "io.github._4drian3d.authmevelocity.lastserver.libs.h2")
     }
 }
 
