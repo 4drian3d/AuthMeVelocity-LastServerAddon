@@ -26,6 +26,7 @@ public final class Database {
                         """;
     private static final String SELECT_BY_PLAYER = "SELECT `server` FROM last_server WHERE `player` = ?;";
     private static final String INSERT_DATA = "INSERT INTO last_server(`player`, `server`) VALUES (?, ?);";
+    private static final String UPDATE_SERVER = "UPDATE last_server SET `server` = ? WHERE `player` = ?;";
 
     private final HikariDataSource source;
     private final Logger logger;
@@ -37,13 +38,12 @@ public final class Database {
         if (Files.notExists(dataDirectory)) {
             Files.createDirectory(dataDirectory);
         }
-        final Path databasePath = dataDirectory.resolve("database.db").toAbsolutePath();
-        if (Files.notExists(databasePath)) {
-            Files.createFile(databasePath);
-        }
+        final Path databasePath = dataDirectory.resolve("database").toAbsolutePath();
         final HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("org.h2.Driver");
         hikariConfig.setJdbcUrl("jdbc:h2:"+databasePath);
+        hikariConfig.setUsername("sa");
+        hikariConfig.setPassword("");
 
         this.source = new HikariDataSource(hikariConfig);
         this.logger = logger;
@@ -68,7 +68,14 @@ public final class Database {
             statement.setString(2, server);
             statement.executeUpdate();
         } catch (final SQLException e) {
-            this.logger.warn("An error occurred updating last server information of player {}", playerName);
+            try (final Connection connection = this.source.getConnection();
+                 final PreparedStatement statement = connection.prepareStatement(UPDATE_SERVER);
+            ) {
+                statement.setString(1, server);
+                statement.setString(2, playerName);
+            } catch (SQLException ex) {
+                this.logger.warn("An error occurred updating last server information of player {}", playerName, ex);
+            }
         }
     }
 
