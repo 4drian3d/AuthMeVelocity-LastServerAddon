@@ -18,8 +18,7 @@ import java.sql.SQLException;
 @Singleton
 public final class Database {
     private static final String CREATE_SENTENCE = """
-                        CREATE TABLE IF NOT EXISTS last_server\
-                        (\
+                        CREATE TABLE IF NOT EXISTS last_server(\
                         `player` VARCHAR(20) NOT NULL PRIMARY KEY, \
                         `server` VARCHAR(20) NOT NULL\
                         );
@@ -62,17 +61,18 @@ public final class Database {
 
     public void setLastServer(final String playerName, final String server) {
         try (final Connection connection = this.source.getConnection();
-             final PreparedStatement statement = connection.prepareStatement(INSERT_DATA);
+             final PreparedStatement statement = connection.prepareStatement(INSERT_DATA)
         ) {
             statement.setString(1, playerName);
             statement.setString(2, server);
             statement.executeUpdate();
         } catch (final SQLException e) {
             try (final Connection connection = this.source.getConnection();
-                 final PreparedStatement statement = connection.prepareStatement(UPDATE_SERVER);
+                 final PreparedStatement statement = connection.prepareStatement(UPDATE_SERVER)
             ) {
                 statement.setString(1, server);
                 statement.setString(2, playerName);
+                statement.executeUpdate();
             } catch (SQLException ex) {
                 this.logger.warn("An error occurred updating last server information of player {}", playerName, ex);
             }
