@@ -3,6 +3,7 @@ package io.github._4drian3d.authmevelocity.lastserver.listener;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.event.EventTask;
+import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import io.github._4drian3d.authmevelocity.api.velocity.event.PreSendOnLoginEvent;
 import io.github._4drian3d.authmevelocity.api.velocity.event.ServerResult;
@@ -25,13 +26,16 @@ public final class PreSendOnLoginListener implements LastLoginListener<PreSendOn
     @Override
     public EventTask executeAsync(final PreSendOnLoginEvent event) {
         return EventTask.withContinuation(continuation -> {
-            final String player = event.player().getUsername();
-            final String newServer = this.database.lastServerOf(player);
-            if (newServer != null) {
+            final Player player = event.player();
+            final String newServer = this.database.lastServerOf(player.getUsername());
+
+            Boolean getRequirePermission = plugin.config().get().getRequirePermission();
+            if (newServer != null && !getRequirePermission || player.hasPermission("lastserver.use")) {
                 this.proxyServer.getServer(newServer)
                         .filter(serverCache::isOnline)
                         .ifPresent(server -> event.setResult(ServerResult.allowed(server)));
             }
+
             continuation.resume();
         });
     }

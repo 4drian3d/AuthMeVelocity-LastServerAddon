@@ -17,6 +17,7 @@ dependencies {
         isTransitive = false
     }
     implementation(libs.h2database)
+    implementation(libs.configurate.hocon)
 }
 
 tasks {
