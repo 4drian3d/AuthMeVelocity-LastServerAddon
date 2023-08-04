@@ -61,21 +61,31 @@ public final class Database {
 
     public void setLastServer(final String playerName, final String server) {
         try (final Connection connection = this.source.getConnection();
-             final PreparedStatement statement = connection.prepareStatement(INSERT_DATA)
+            final PreparedStatement statement = fromPlayer(playerName, connection);
+            final ResultSet rs = statement.executeQuery()
         ) {
-            statement.setString(1, playerName);
-            statement.setString(2, server);
-            statement.executeUpdate();
-        } catch (final SQLException e) {
-            try (final Connection connection = this.source.getConnection();
-                 final PreparedStatement statement = connection.prepareStatement(UPDATE_SERVER)
-            ) {
-                statement.setString(1, server);
-                statement.setString(2, playerName);
-                statement.executeUpdate();
-            } catch (SQLException ex) {
-                this.logger.warn("An error occurred updating last server information of player {}", playerName, ex);
+            if (rs.next()) {
+                // Already has server data
+                final String serverFromDB = rs.getString("server");
+                // If the last player server is the same in the database, the UPDATE sequence is avoided
+                if (server.equalsIgnoreCase(serverFromDB)) {
+                    return;
+                }
+                try (final PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SERVER)) {
+                    updateStatement.setString(1, server);
+                    updateStatement.setString(2, playerName);
+                    updateStatement.executeUpdate();
+                }
+            } else {
+                // Insert new server data
+                try (final PreparedStatement insertStatement = connection.prepareStatement(INSERT_DATA)) {
+                    insertStatement.setString(1, playerName);
+                    insertStatement.setString(2, server);
+                    insertStatement.executeUpdate();
+                }
             }
+        } catch (final SQLException e) {
+            this.logger.warn("An error occurred updating last server information of player {}", playerName, e);
         }
     }
 
