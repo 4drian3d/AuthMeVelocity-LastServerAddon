@@ -53,7 +53,7 @@ public final class Database {
              final PreparedStatement statement = fromPlayer(playerName, connection);
              final ResultSet rs = statement.executeQuery()
         ) {
-            return rs.getString("server");
+            return rs.next() ? rs.getString("server") : null;
         } catch (final SQLException e) {
             return null;
         }
