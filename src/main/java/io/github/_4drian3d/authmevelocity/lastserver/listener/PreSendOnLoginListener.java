@@ -29,8 +29,8 @@ public final class PreSendOnLoginListener implements LastLoginListener<PreSendOn
             final Player player = event.player();
             final String newServer = this.database.lastServerOf(player.getUsername());
 
-            boolean getRequirePermission = plugin.config().get().getRequirePermission();
-            if (newServer != null && !getRequirePermission || player.hasPermission("lastserver.use")) {
+            final boolean requirePermission = plugin.config().get().getRequirePermission();
+            if (newServer != null && (!requirePermission || player.hasPermission("lastserver.use"))) {
                 this.proxyServer.getServer(newServer)
                         .filter(serverCache::isOnline)
                         .ifPresent(server -> event.setResult(ServerResult.allowed(server)));
