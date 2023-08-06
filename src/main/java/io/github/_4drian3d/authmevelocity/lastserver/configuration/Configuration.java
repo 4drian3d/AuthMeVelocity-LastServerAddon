@@ -9,12 +9,12 @@ import java.util.List;
 @SuppressWarnings({"CanBeFinal", "FieldMayBeFinal"})
 public final class Configuration {
     @Comment("Require players to have the lastserver.use permission?")
-    private Boolean requirePermission = false;
+    private boolean requirePermission = false;
 
     @Comment("A list of servers to not save as a player's last server")
     private List<String> excludedServers = List.of("login", "spawn");
 
-    public Boolean getRequirePermission() {
+    public boolean getRequirePermission() {
         return this.requirePermission;
     }
 
