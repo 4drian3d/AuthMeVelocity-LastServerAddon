@@ -17,6 +17,7 @@ dependencies {
         isTransitive = false
     }
     implementation(libs.h2database)
+    implementation(libs.configurate.hocon)
 }
 
 tasks {
@@ -39,6 +40,8 @@ tasks {
         archiveClassifier.set("")
         relocate("com.zaxxer.hikari", "io.github._4drian3d.authmevelocity.lastserver.libs.hikari")
         relocate("org.h2", "io.github._4drian3d.authmevelocity.lastserver.libs.h2")
+        relocate("org.spongepowered", "io.github._4drian3d.authmevelocity.lastserver.libs.sponge")
+        relocate("io.leangen.geantyref", "io.github._4drian3d.authmevelocity.lastserver.libs.geantyref")
     }
 }
 

@@ -11,6 +11,8 @@ import io.github._4drian3d.authmevelocity.lastserver.LastServerAddon;
 import io.github._4drian3d.authmevelocity.lastserver.database.Database;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public final class DisconnectListener implements LastLoginListener<DisconnectEvent> {
     @Inject
     private EventManager eventManager;
@@ -35,7 +37,11 @@ public final class DisconnectListener implements LastLoginListener<DisconnectEve
                     .map(ServerConnection::getServerInfo)
                     .map(ServerInfo::getName)
                     .orElse("");
-            database.setLastServer(player.getUsername(), server);
+
+            List<String> excludedServers = plugin.config().get().getExcludedServers();
+            if (!excludedServers.contains(server)) {
+                database.setLastServer(player.getUsername(), server);
+            }
         });
     }
 }
