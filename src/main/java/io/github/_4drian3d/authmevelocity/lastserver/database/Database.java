@@ -29,6 +29,7 @@ public final class Database {
 
     private final HikariDataSource source;
     private final Logger logger;
+
     @Inject
     public Database(
             final @DataDirectory Path dataDirectory,

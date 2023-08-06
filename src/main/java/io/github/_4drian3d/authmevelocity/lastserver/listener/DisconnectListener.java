@@ -12,6 +12,7 @@ import io.github._4drian3d.authmevelocity.lastserver.database.Database;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public final class DisconnectListener implements LastLoginListener<DisconnectEvent> {
     @Inject
@@ -33,15 +34,12 @@ public final class DisconnectListener implements LastLoginListener<DisconnectEve
         }
         return EventTask.async(() -> {
             final Player player = event.getPlayer();
-            final String server = player.getCurrentServer()
+            final List<String> excludedServers = plugin.config().get().getExcludedServers();
+            player.getCurrentServer()
                     .map(ServerConnection::getServerInfo)
                     .map(ServerInfo::getName)
-                    .orElse("");
-
-            List<String> excludedServers = plugin.config().get().getExcludedServers();
-            if (!excludedServers.contains(server)) {
-                database.setLastServer(player.getUsername(), server);
-            }
+                    .filter(Predicate.not(excludedServers::contains))
+                    .ifPresent(server -> database.setLastServer(player.getUsername(), server));
         });
     }
 }

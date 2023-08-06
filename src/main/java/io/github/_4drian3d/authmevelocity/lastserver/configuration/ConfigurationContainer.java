@@ -11,9 +11,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 public final class ConfigurationContainer<C> {
     private final AtomicReference<C> config;
 
-    private ConfigurationContainer(
-            final C config
-    ) {
+    private ConfigurationContainer(final C config) {
         this.config = new AtomicReference<>(config);
     }
 
@@ -27,9 +25,7 @@ public final class ConfigurationContainer<C> {
         final HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
                 .defaultOptions(opts -> opts
                         .shouldCopyDefaults(true)
-                        .header("""
-                    AuthMeVelocity-LastServer-Addon | by 4drian3d
-                    """)
+                        .header("AuthMeVelocity-LastServer-Addon | by 4drian3d")
                 )
                 .path(path)
                 .build();
