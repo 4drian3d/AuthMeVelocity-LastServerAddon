@@ -25,7 +25,7 @@ h2database = "2.2.224"
 # Compile Only Dependencies
 velocity = { group = "com.velocitypowered", name = "velocity-api", version.ref = "velocity" }
 caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
-authmevelocity = { module = "io.github.4drian3d:authmevelocity-api-velocity", version = "4.0.2" }
+authmevelocity = { module = "io.github.4drian3d:authmevelocity-api-velocity", version = "4.1.0" }
 
 bstats = { module = "org.bstats:bstats-velocity", version.ref = "bstats" }
 
