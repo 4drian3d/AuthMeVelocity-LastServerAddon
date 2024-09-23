@@ -15,7 +15,7 @@ runvelocity = "2.2.2"
 # Utility Libraries
 configurate = "4.1.2"
 libby = "43d25ade72"
-bstats = "3.0.2"
+bstats = "3.1.0"
 
 hikaricp = "5.1.0"
 h2database = "2.2.224"
