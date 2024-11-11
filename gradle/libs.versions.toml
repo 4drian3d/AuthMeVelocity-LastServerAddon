@@ -18,7 +18,7 @@ libby = "43d25ade72"
 bstats = "3.0.2"
 
 hikaricp = "6.1.0"
-h2database = "2.2.224"
+h2database = "2.3.232"
 
 [libraries]
 
