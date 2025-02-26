@@ -13,7 +13,7 @@ shadow = "8.1.1"
 runvelocity = "2.3.1"
 
 # Utility Libraries
-configurate = "4.1.2"
+configurate = "4.2.0"
 libby = "43d25ade72"
 bstats = "3.1.0"
 
