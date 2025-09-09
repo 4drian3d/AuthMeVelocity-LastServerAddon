@@ -17,7 +17,7 @@ configurate = "4.2.0"
 libby = "43d25ade72"
 bstats = "3.1.0"
 
-hikaricp = "6.1.0"
+hikaricp = "6.3.2"
 h2database = "2.3.232"
 
 [libraries]
