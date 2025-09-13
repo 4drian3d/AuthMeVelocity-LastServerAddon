@@ -5,6 +5,8 @@
 Send your players to the last server they have been on when logging in to AuthMe
 
 ## Installation
-- Download LastServer Addon from Modrinth
+- Ensure you have the latest version of [AuthMeVelocity](https://modrinth.com/plugin/authmevelocity) installed
+- Download [LastServer Addon](https://modrinth.com/plugin/authmevelocity-lastserveraddon) from Modrinth
 - Drag and drop on your plugins folder
+- Ensure that the AuthMeVelocity `sendOnLogin` configuration option is enabled
 - Start the server
