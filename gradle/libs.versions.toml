@@ -11,7 +11,7 @@ shadow = "9.2.1"
 runvelocity = "3.0.0"
 
 hikaricp = "7.0.2"
-h2database = "2.3.232"
+h2database = "2.4.240"
 
 [libraries]
 
