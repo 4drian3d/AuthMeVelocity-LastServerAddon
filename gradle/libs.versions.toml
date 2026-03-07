@@ -17,7 +17,7 @@ h2database = "2.4.240"
 
 # Compile Only Dependencies
 velocity = { group = "com.velocitypowered", name = "velocity-api", version.ref = "velocity" }
-authmevelocity = { module = "io.github.4drian3d:authmevelocity-api-velocity", version = "4.2.0" }
+authmevelocity = { module = "io.github.4drian3d:authmevelocity-api-velocity", version = "4.3.0" }
 
 hikaricp = { module = "com.zaxxer:HikariCP", version.ref = "hikaricp" }
 h2database = { module =  "com.h2database:h2", version.ref = "h2database" }
