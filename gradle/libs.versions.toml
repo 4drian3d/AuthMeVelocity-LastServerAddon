@@ -10,7 +10,7 @@ blossom = "2.2.0"
 shadow = "9.4.1"
 runvelocity = "3.0.2"
 
-hikaricp = "7.0.2"
+hikaricp = "7.1.0"
 h2database = "2.4.240"
 
 [libraries]
