@@ -7,7 +7,7 @@ velocity = "3.4.0"
 
 # Gradle Plugins
 blossom = "2.2.0"
-shadow = "9.4.1"
+shadow = "9.5.1"
 runvelocity = "3.0.2"
 
 hikaricp = "7.1.0"
